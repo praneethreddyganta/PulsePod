@@ -6,16 +6,15 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.8-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![SNNTorch](https://img.shields.io/badge/SNN-Neuromorphic-purple)](https://snntorch.readthedocs.io/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![SNNTorch](https://img.shields.io/badge/SNN-Neuromorphic-darkblue)](https://snntorch.readthedocs.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=red)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)]()
 
 <p align="center">
   <a href="#-project-overview">Overview</a> •
-  <a href="#-features">Features</a> •
+  <a href="#-technical-specifications">Tech Specs</a> •
   <a href="#-architecture">Architecture</a> •
   <a href="#-installation">Installation</a> •
-  <a href="#-usage">Usage</a> •
   <a href="#-performance--results">Results</a>
 </p>
 </div>
@@ -23,18 +22,39 @@
 ---
 
 ## 🩺 Project Overview
-**PulsePod** is an end-to-end AI system designed to detect cardiac abnormalities from ECG signals with high reliability and efficiency. Unlike traditional models that overfit to specific datasets, PulsePod is built for **generalization** and **edge deployment**.
+**PulsePod** is an end-to-end AI system designed to detect cardiac abnormalities from ECG signals with high reliability and efficiency. Unlike traditional models that fail when deployed on new patient populations (the **Dataset Shift** problem), PulsePod is built for **generalization**.
 
-It tackles the critical challenge of **Domain Shift** by training on a massive, unified dataset combining **MIT-BIH** and **PTB-XL** records. The system features a suite of advanced models ranging from robust **1D-CNNs** to ultra-low-power **Spiking Neural Networks (SNNs)**.
+By training on a massive, unified dataset combining **MIT-BIH** and **PTB-XL** records: , the system achieves robust performance across diverse demographics. It features a suite of models ranging from high-accuracy **1D-CNNs** to ultra-low-power **Spiking Neural Networks (SNNs)** designed for battery-constrained wearable devices: 43].
+
+### 🌟 Key Features
+* **🛡️ Robust Generalization:** Achieved **82% Accuracy** on the unseen PTB-XL dataset, significantly outperforming models trained solely on MIT-BIH: 13].
+* **🧠 Neuromorphic Intelligence:** Validated **SNNs** (Leaky Integrate-and-Fire) achieving ~85% accuracy with high energy efficiency: 386].
+* **⚖️ Stratified Training:** Models trained on **244,502 heartbeats** with balanced class distribution to prevent bias: 9, 336].
+* **🚀 Real-Time Dashboard:** Interactive Streamlit interface for visualizing live ECG inference and probability confidence.
 
 ---
 
-## 🌟 Features
-* **🧠 Multi-Paradigm Modeling:** Includes **1D-CNNs**, **CNN-LSTM Hybrids**, and **Spiking Neural Networks (SNNs)**.
-* **🛡️ Robust Generalization:** Trained on a unified dataset to solve domain shift between hospitals.
-* **⚡ Neuromorphic Intelligence:** Validated SNNs proving viability for ultra-low-power hardware.
-* **🚀 Streamlit Dashboard:** Interactive web interface for visualizing ECG signals and model predictions.
-* **📊 Unified Data Pipeline:** Scripts to merge and standardize diverse ECG sources.
+## 🔬 Technical Specifications
+
+The system was engineered and validated using rigorous quantitative benchmarks.
+
+### 📊 Data Composition
+* **Total Processed Heartbeats:** 305,628 (Train + Test): 336].
+* **Source Integration:**
+    * **MIT-BIH:** 54,680 beats (Gold-standard arrhythmia annotations): 9].
+    * **PTB-XL:** 250,948 beats (Diverse 12-lead clinical data): 9].
+* **Preprocessing:** NeuroKit2 pipeline with **187-sample fixed window** segmentation: 48].
+
+### 🧠 Model Architectures
+**1. Deep CNN (Robust Classifier)**
+* **Structure:** 2-Layer 1D-Convolutional Network with MaxPooling and Dropout (0.5): 263, 276].
+* **Kernels:** 32 & 64 filters (Kernel Size=5) optimized for morphological feature extraction: 263, 268].
+* **Loss Function:** **Focal Loss** implemented to counter class imbalance: 54].
+
+**2. Spiking Neural Network (Neuromorphic)**
+* **Neuron Model:** Leaky Integrate-and-Fire (LIF) with surrogate gradient descent: 227, 288].
+* **Simulation:** **50 Time Steps** per inference window: 309].
+* **Decay Rate:** $\beta = 0.95$ (Optimized for membrane potential retention): 288].
 
 ---
 
@@ -59,26 +79,88 @@ graph LR
     E --> E1
     E --> E2
     E --> E3
-⚙️ InstallationTo ensure environment stability, requirements are split into two categories.1. Clone the RepositoryBashgit clone [https://github.com/yourusername/PulsePod.git](https://github.com/yourusername/PulsePod.git)
+````
+
+-----
+
+## ⚙️ Installation
+
+To ensure environment stability, requirements are split into two categories.
+
+### 1\. Clone the Repository
+
+```bash
+git clone [https://github.com/Vishwanath-06/PulsePod.git](https://github.com/Vishwanath-06/PulsePod.git)
 cd PulsePod
 git lfs install
 git lfs pull
-2. Set up the EnvironmentOption A: For Standard CNN Models (Recommended)Use this for the main Dashboard and standard Deep Learning models.Bash# Create virtual environment
+```
+
+### 2\. Set up the Environment
+
+**Option A: For Standard CNN Models (Recommended)**
+Use this for the main Dashboard and standard Deep Learning models.
+
+```bash
+# Create virtual environment
 python -m venv venv_cnn
 source venv_cnn/bin/activate  # or venv_cnn\Scripts\activate on Windows
 
 # Install dependencies
 pip install -r cnn_requirements.txt
-Option B: For Neuromorphic SNN ExperimentsUse this specifically for running Spiking Neural Networks.Bash# Create virtual environment
+```
+
+**Option B: For Neuromorphic SNN Experiments**
+Use this specifically for running Spiking Neural Networks.
+
+```bash
+# Create virtual environment
 python -m venv venv_snn
 source venv_snn/bin/activate  # or venv_snn\Scripts\activate on Windows
 
 # Install dependencies
 pip install -r snn_requirements.txt
-🚀 Usage1. Launch the DashboardVisualize the inference stream in a web interface.Bash# Ensure venv_cnn is active
+```
+
+-----
+
+## 🚀 Usage
+
+### 1\. Launch the Dashboard
+
+Visualize the inference stream in a web interface.
+
+```bash
+# Ensure venv_cnn is active
 streamlit run app.py
-2. Data Preprocessing (Optional)The test data is already provided in .npy format in the data/ folder. If you wish to regenerate the unified test set from raw sources:Bashpython data/create_unified_test_set.py
-📊 Performance & ResultsWe evaluated our models on a held-out, multi-domain test set (Unified MIT-BIH + PTB-XL) to ensure true robustness.Model ArchitecturePrecision (Abnormal)Recall (Abnormal)F1-ScoreUse CaseStandalone CNN89%86%88%Best Overall BalanceSpiking NN (SNN)85%87%86%Ultra-Low Power / High RecallCNN + LSTM91%82%87%Precision / False Alarm Reduction📂 Project StructurePlaintextPulsePod/
+```
+
+### 2\. Data Preprocessing (Optional)
+
+The test data is already provided in `.npy` format in the `data/` folder. If you wish to regenerate the unified test set from raw sources:
+
+```bash
+python data/create_unified_test_set.py
+```
+
+-----
+
+## 📊 Performance & Results
+
+We evaluated our models on a held-out, multi-domain test set (Unified MIT-BIH + PTB-XL) to ensure true robustness.
+
+| Model Architecture | Precision (Abnormal) | Recall (Abnormal) | F1-Score | Use Case |
+| :--- | :---: | :---: | :---: | :--- |
+| **Standalone CNN** | 89% | 86% | 88% | Best Overall Balance |
+| **Spiking NN (SNN)** | 85% | 87% | 86% | Ultra-Low Power / High Recall |
+| **CNN + LSTM** | 91% | 82% | 87% | Precision / False Alarm Reduction |
+
+-----
+
+## 📂 Project Structure
+
+```text
+PulsePod/
 ├── data/                           # Processed .npy datasets & Scripts
 │   ├── mit_bih/
 │   ├── ptb_xl/
@@ -93,4 +175,14 @@ streamlit run app.py
 ├── cnn_requirements.txt            # Standard dependencies
 ├── snn_requirements.txt            # SNN dependencies
 └── readme.md
-🔮 Future ScopeHardware Porting: Deploy SNN models to Intel Loihi or Neuromorphic chips.Multi-Class: Extend detection to specific arrhythmias (AFib, PVC, LBBB).Federated Learning: Implement privacy-preserving patient data training.<div align="center">Built with 💙 by [Vishwanath.T]</div>
+```
+
+-----
+
+## 🔮 Future Scope
+
+  * **Hardware Porting:** Deploy SNN models to Intel Loihi or Neuromorphic chips.
+  * **Multi-Class:** Extend detection to specific arrhythmias (AFib, PVC, LBBB).
+  * **Federated Learning:** Implement privacy-preserving patient data training.
+
+<div align="center">Built with 💙 by Vishwanath.T</div>

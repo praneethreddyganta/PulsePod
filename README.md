@@ -44,21 +44,21 @@ The system follows a modular pipeline from raw signal ingestion to edge deployme
 
 ```mermaid
 graph LR
-A[Raw ECG Data] --> B(Preprocessing & Segmentation)
-B --> C{Unified Dataset Creation}
-C --> D[Training Loop]
-D --> E[Model Zoo]
-E --> F[Deployment Dashboard]
+    A[Raw ECG Data] --> B(Preprocessing & Segmentation)
+    B --> C{Unified Dataset Creation}
+    C --> D[Training Loop]
+    D --> E[Model Zoo]
+    E --> F[Deployment Dashboard]
 
-subgraph Models
-E1[Standalone CNN]
-E2[SNN (Neuromorphic)]
-E3[CNN+LSTM]
-end
+    subgraph Models
+        E1[Standalone CNN]
+        E2[SNN Neuromorphic]
+        E3[CNN+LSTM]
+    end
 
-E --> E1
-E --> E2
-E --> E3
+    E --> E1
+    E --> E2
+    E --> E3
 ⚙️ InstallationTo ensure environment stability, requirements are split into two categories.1. Clone the RepositoryBashgit clone [https://github.com/yourusername/PulsePod.git](https://github.com/yourusername/PulsePod.git)
 cd PulsePod
 git lfs install

@@ -24,12 +24,12 @@
 ## 🩺 Project Overview
 **PulsePod** is an end-to-end AI system designed to detect cardiac abnormalities from ECG signals with high reliability and efficiency. Unlike traditional models that fail when deployed on new patient populations (the **Dataset Shift** problem), PulsePod is built for **generalization**.
 
-By training on a massive, unified dataset combining **MIT-BIH** and **PTB-XL** records: , the system achieves robust performance across diverse demographics. It features a suite of models ranging from high-accuracy **1D-CNNs** to ultra-low-power **Spiking Neural Networks (SNNs)** designed for battery-constrained wearable devices: 43].
+By training on a massive, unified dataset combining **MIT-BIH** and **PTB-XL** records: , the system achieves robust performance across diverse demographics. It features a suite of models ranging from high-accuracy **1D-CNNs** to ultra-low-power **Spiking Neural Networks (SNNs)** designed for battery-constrained wearable devices
 
 ### 🌟 Key Features
-* **🛡️ Robust Generalization:** Achieved **82% Accuracy** on the unseen PTB-XL dataset, significantly outperforming models trained solely on MIT-BIH: 13].
-* **🧠 Neuromorphic Intelligence:** Validated **SNNs** (Leaky Integrate-and-Fire) achieving ~85% accuracy with high energy efficiency: 386].
-* **⚖️ Stratified Training:** Models trained on **244,502 heartbeats** with balanced class distribution to prevent bias: 9, 336].
+* **🛡️ Robust Generalization:** Achieved **82% Accuracy** on the unseen PTB-XL dataset, significantly outperforming models trained solely on MIT-BIH
+* **🧠 Neuromorphic Intelligence:** Validated **SNNs** (Leaky Integrate-and-Fire) achieving ~85% accuracy with high energy efficiency
+* **⚖️ Stratified Training:** Models trained on **244,502 heartbeats** with balanced class distribution to prevent bias
 * **🚀 Real-Time Dashboard:** Interactive Streamlit interface for visualizing live ECG inference and probability confidence.
 
 ---
@@ -39,22 +39,22 @@ By training on a massive, unified dataset combining **MIT-BIH** and **PTB-XL** r
 The system was engineered and validated using rigorous quantitative benchmarks.
 
 ### 📊 Data Composition
-* **Total Processed Heartbeats:** 305,628 (Train + Test): 336].
+* **Total Processed Heartbeats:** 305,628 (Train + Test)
 * **Source Integration:**
-    * **MIT-BIH:** 54,680 beats (Gold-standard arrhythmia annotations): 9].
-    * **PTB-XL:** 250,948 beats (Diverse 12-lead clinical data): 9].
-* **Preprocessing:** NeuroKit2 pipeline with **187-sample fixed window** segmentation: 48].
+    * **MIT-BIH:** 54,680 beats (Gold-standard arrhythmia annotations)
+    * **PTB-XL:** 250,948 beats (Diverse 12-lead clinical data)
+* **Preprocessing:** NeuroKit2 pipeline with **187-sample fixed window** segmentation
 
 ### 🧠 Model Architectures
 **1. Deep CNN (Robust Classifier)**
-* **Structure:** 2-Layer 1D-Convolutional Network with MaxPooling and Dropout (0.5): 263, 276].
-* **Kernels:** 32 & 64 filters (Kernel Size=5) optimized for morphological feature extraction: 263, 268].
-* **Loss Function:** **Focal Loss** implemented to counter class imbalance: 54].
+* **Structure:** 2-Layer 1D-Convolutional Network with MaxPooling and Dropout (0.5)
+* **Kernels:** 32 & 64 filters (Kernel Size=5) optimized for morphological feature extraction
+* **Loss Function:** **Focal Loss** implemented to counter class imbalance
 
 **2. Spiking Neural Network (Neuromorphic)**
-* **Neuron Model:** Leaky Integrate-and-Fire (LIF) with surrogate gradient descent: 227, 288].
-* **Simulation:** **50 Time Steps** per inference window: 309].
-* **Decay Rate:** $\beta = 0.95$ (Optimized for membrane potential retention): 288].
+* **Neuron Model:** Leaky Integrate-and-Fire (LIF) with surrogate gradient descent
+* **Simulation:** **50 Time Steps** per inference window:
+* **Decay Rate:** $\beta = 0.95$ (Optimized for membrane potential retention)
 
 ---
 

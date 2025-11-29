@@ -24,7 +24,7 @@ from tqdm import tqdm
 # --- 1. CONFIGURATION ---
 print("--- Step 1: Initializing Configuration ---")
 # Define the output directory for the new balanced dataset
-OUTPUT_DIR = r"V:\Projects\MP\Ver3.0\processed_data_balanced"
+OUTPUT_DIR = r"......"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # List of arrhythmia-heavy records from the MIT-BIH Arrhythmia Database

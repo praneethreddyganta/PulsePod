@@ -19,7 +19,7 @@ This directory archives the experimental notebooks, exploratory data analysis (E
     **Standardization:** Fixed window segmentation (187 samples) to align diverse signal sources.
     **Merging:** Combined 54,680 MIT-BIH beats with 250,948 PTB-XL beats.
 
-### 3. `03_data_augmentation_stratification.ipynb`
+### 3. `03_data_augmentation_stratification.py`
 * **Focus:** Solving class imbalance and enhancing robustness.
 * **Techniques:**
     **Stratified Splitting:** Ensured a consistent 70/15/15 split across both datasets.

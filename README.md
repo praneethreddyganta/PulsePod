@@ -480,7 +480,7 @@ python research/03_data_augmentation_stratification.py
 |---|---|
 | **Ganta Praneeth Reddy** | ECG data preprocessing pipeline, R-peak based beat segmentation, HRV feature extraction, CNN / CNN+LSTM / SNN experimentation |
 | **T. Vishwanath** | Core model development and training, focal loss experiments, model evaluation and checkpointing |
-| **S. Smith** | Additional project implementation, Streamlit demo integration, and testing support |
+| **S. Samith** | Additional project implementation, Streamlit demo integration, and testing support |
 
 ---
 
